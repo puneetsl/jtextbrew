@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Taken from: https://github.com/relaynetwork/fuzzy-string-matching
  * Date: Oct 12, 2010
  * License: Apache V2
- * @author puneet singh [since I heavily modified this]
+ * @author puneet singh
  * my site: http://www.puneetsingh.info
  * Beware this code is not fully tested yet
  * Text Brew Implementation.  See: http://www.ling.ohio-state.edu/~cbrew/795M/string-distance.html
