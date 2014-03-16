@@ -34,9 +34,9 @@ public class TextBrew {
 		if (len == maxlen && left.equals(right))
 			return 1.0;
 		double retScore = (1.0 - ((new TextBrew().computeSimilarity(left,right).cost) / (len)));
-//		if(retScore < 0.05) 
-//			return 0.0;//for all erroneous cases
-//		else
+		if(retScore < 0.05) 
+			return 0.0;//for all erroneous cases
+		else
 			return retScore;
 	}
 
