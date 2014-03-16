@@ -1,4 +1,4 @@
-package info.puneetsingh.fsm;
+package info.puneetsingh.fsm;//fsm stands for fuzzy string matching
 
 import java.util.List;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * Date: Oct 12, 2010
  * License: Apache V2
  * @author puneet singh [since I heavily modified this]
+ * my site: http://www.puneetsingh.info
  * Beware this code is not fully tested yet
  * Text Brew Implementation.  See: http://www.ling.ohio-state.edu/~cbrew/795M/string-distance.html
  * @version 0.01
