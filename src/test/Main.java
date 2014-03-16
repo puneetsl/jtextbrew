@@ -9,5 +9,8 @@ public class Main {
 		System.out.println(TextBrew.compare("", "hospital"));
 		System.out.println(TextBrew.compare("ko", "no"));
 		System.out.println(TextBrew.compare("hojpithol", "hospital"));
+		System.out.println(TextBrew.compare("puneetsl", "puneet singh ludu"));
+		System.out.println(TextBrew.compare("puneet singh ludu","puneetsl"));
+		System.out.println(TextBrew.compareAndGiveBestScore("puneet singh ludu","puneetsl"));
 	}
 }

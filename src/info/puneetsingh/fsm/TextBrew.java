@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * my site: http://www.puneetsingh.info
  * Beware this code is not fully tested yet
  * Text Brew Implementation.  See: http://www.ling.ohio-state.edu/~cbrew/795M/string-distance.html
- * @version 0.02
+ * @version 0.03
  */
 public class TextBrew {
 	public Costs costs = null;
@@ -29,17 +29,39 @@ public class TextBrew {
 	public static Double compare(String left, String right) {
 		double len = (left.length()+ right.length())/2.0;
 		int maxlen = Math.max(left.length(), right.length());
+		
 		if ((double) len / (double) maxlen <= 0.5)
 			return 0.0;
-		if (len == maxlen && left.equals(right))
-			return 1.0;
+		
 		double retScore = (1.0 - ((new TextBrew().computeSimilarity(left,right).cost) / (len)));
 		if(retScore < 0.05) 
 			return 0.0;//for all erroneous cases
 		else
 			return retScore;
 	}
-
+	/**
+	 * static compare function to compare two string without order using textbrew algorithm
+	 * i.e. left or right does not matter, and this function would return best score
+	 * without considering order.
+	 * @param left
+	 * @param right
+	 * @return value of distance between two texts between 0.0 and 1.0 (greater the better)
+	 */
+	public static Double compareAndGiveBestScore(String left, String right) {
+		double len = (left.length()+ right.length())/2.0;
+		int maxlen = Math.max(left.length(), right.length());
+		
+		if ((double) len / (double) maxlen <= 0.5)
+			return 0.0;
+		
+		double retScore1 = (1.0 - ((new TextBrew().computeSimilarity(left,right).cost) / (len)));
+		double retScore2 = (1.0 - ((new TextBrew().computeSimilarity(right,left).cost) / (len)));
+		double retScore = Math.max(retScore1, retScore2);
+		if(retScore < 0.05) 
+			return 0.0;//for all erroneous cases
+		else
+			return retScore;
+	}
 
 	public BrewResult computeSimilarity(String left, String right) {
 		if ( (null == left||left.length() == 0) && (null == right||right.length() == 0)) {
