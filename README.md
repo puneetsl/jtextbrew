@@ -5,7 +5,7 @@ Java Library for fuzzy string matching using TextBrew algorithm.<br>
 Library is usable for general use of fuzzy string matching, and can even work for abbreviations and shorthands such as:<br>
 `clmbs blvd` and  `columbus boulevard` gives 89% match
 
-## TODO ##
+## Issues/TODO ##
 * Validate the traceback path
 * Sometimes the traceback path is different from the test data
 
