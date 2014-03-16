@@ -236,7 +236,7 @@ public class TextBrew {
 		public double match = 0.0d;
 		public double insert = 0.1d;
 		public double delete = 15.0d;
-		public double transpose = 2.0d;
+		public double transpose = 1.0d;
 		public double substitute = 1.0d;
 	}
 
