@@ -1,9 +1,9 @@
-textbrew
+jtextbrew
 ========
 
-Java Library for fuzzy string matching using TextBrew.<br>
+Java Library for fuzzy string matching using TextBrew algorithm.<br>
 Library is usable for general use of fuzzy string matching, and can even work for abbreviations and shorthands such as:<br>
-`clmbs blvd` and  `columbus boulevard`
+`clmbs blvd` and  `columbus boulevard` gives 89% match
 
 ## TODO ##
 * Validate the traceback path
