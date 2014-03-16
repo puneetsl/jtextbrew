@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * my site: http://www.puneetsingh.info
  * Beware this code is not fully tested yet
  * Text Brew Implementation.  See: http://www.ling.ohio-state.edu/~cbrew/795M/string-distance.html
- * @version 0.01
+ * @version 0.02
  */
 public class TextBrew {
 	public Costs costs = null;
@@ -27,13 +27,17 @@ public class TextBrew {
 	 * @return value of distance between two texts between 0.0 and 1.0 (greater the better)
 	 */
 	public static Double compare(String left, String right) {
-		int len = Math.min(left.length(), right.length());
+		double len = (left.length()+ right.length())/2.0;
 		int maxlen = Math.max(left.length(), right.length());
 		if ((double) len / (double) maxlen <= 0.5)
 			return 0.0;
 		if (len == maxlen && left.equals(right))
 			return 1.0;
-		return (1.0 - ((new TextBrew().computeSimilarity(left,right).cost) / (len)));
+		double retScore = (1.0 - ((new TextBrew().computeSimilarity(left,right).cost) / (len)));
+//		if(retScore < 0.05) 
+//			return 0.0;//for all erroneous cases
+//		else
+			return retScore;
 	}
 
 
@@ -234,9 +238,9 @@ public class TextBrew {
 	public static class Costs {
 		public double start = 0.0d;
 		public double match = 0.0d;
-		public double insert = 0.1d;
-		public double delete = 15.0d;
-		public double transpose = 1.0d;
+		public double insert = 0.2d;
+		public double delete = 1d;
+		public double transpose = 2.0d;
 		public double substitute = 1.0d;
 	}
 

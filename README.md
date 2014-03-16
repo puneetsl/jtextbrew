@@ -3,11 +3,8 @@ textbrew
 
 Java Library for fuzzy string matching using TextBrew
 
-## Current State ##
-Currently the code is showing errant behaviour, still the results are promising. 
 
-## Issues ##
-* Start Cost should be carried across the 1st row and 1st col, it is not currently initialized correctly.
+## TODO ##
 * Validate the traceback path
 
 ## References ##
