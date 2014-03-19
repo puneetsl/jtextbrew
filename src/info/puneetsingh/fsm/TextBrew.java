@@ -12,13 +12,24 @@ import java.util.ArrayList;
  * my site: http://www.puneetsingh.info
  * Beware this code is not fully tested yet
  * Text Brew Implementation.  See: http://www.ling.ohio-state.edu/~cbrew/795M/string-distance.html
- * @version 0.03
+ * @version 0.04
  */
 public class TextBrew {
 	public Costs costs = null;
-
+	
 	public TextBrew () {
 		costs = new Costs();
+	}
+	private static Double match=null;
+	private static Double insert=null;
+	private static Double delete=null;
+	private static Double substitute=null;
+	public static void setCosts(double Match, double Insert, double Delete, double Substitute)
+	{
+		match = Match;
+		insert = Insert;
+		delete = Delete;
+		substitute = Substitute;
 	}
 	/**
 	 * static compare function to compare two string using textbrew algorithm
@@ -27,13 +38,21 @@ public class TextBrew {
 	 * @return value of distance between two texts between 0.0 and 1.0 (greater the better)
 	 */
 	public static Double compare(String left, String right) {
+		TextBrew t = new TextBrew();
+		if(match!=null&&insert!=null&&delete!=null&&substitute!=null)
+		{
+			t.costs.match = match;
+			t.costs.insert = insert;
+			t.costs.delete = delete;
+			t.costs.substitute = substitute;
+		}
 		double len = (left.length()+ right.length())/2.0;
 		int maxlen = Math.max(left.length(), right.length());
 		
 		if ((double) len / (double) maxlen <= 0.5)
 			return 0.0;
 		
-		double retScore = (1.0 - ((new TextBrew().computeSimilarity(left,right).cost) / (len)));
+		double retScore = (1.0 - ((t.computeSimilarity(left,right).cost) / (len)));
 		if(retScore < 0.05) 
 			return 0.0;//for all erroneous cases
 		else
@@ -48,21 +67,29 @@ public class TextBrew {
 	 * @return value of distance between two texts between 0.0 and 1.0 (greater the better)
 	 */
 	public static Double compareAndGiveBestScore(String left, String right) {
+		TextBrew t = new TextBrew();
+		if(match!=null&&insert!=null&&delete!=null&&substitute!=null)
+		{
+			t.costs.match = match;
+			t.costs.insert = insert;
+			t.costs.delete = delete;
+			t.costs.substitute = substitute;
+		}
 		double len = (left.length()+ right.length())/2.0;
 		int maxlen = Math.max(left.length(), right.length());
 		
 		if ((double) len / (double) maxlen <= 0.5)
 			return 0.0;
 		
-		double retScore1 = (1.0 - ((new TextBrew().computeSimilarity(left,right).cost) / (len)));
-		double retScore2 = (1.0 - ((new TextBrew().computeSimilarity(right,left).cost) / (len)));
+		double retScore1 = (1.0 - (t.computeSimilarity(left,right).cost) / (len));
+		double retScore2 = (1.0 - (t.computeSimilarity(right,left).cost) / (len));
 		double retScore = Math.max(retScore1, retScore2);
 		if(retScore < 0.05) 
 			return 0.0;//for all erroneous cases
 		else
 			return retScore;
 	}
-
+	
 	public BrewResult computeSimilarity(String left, String right) {
 		if ( (null == left||left.length() == 0) && (null == right||right.length() == 0)) {
 			return new BrewResult();
@@ -257,7 +284,7 @@ public class TextBrew {
 		}
 
 	}
-	public static class Costs {
+	private class Costs {
 		public double start = 0.0d;
 		public double match = 0.0d;
 		public double insert = 0.2d;
@@ -265,8 +292,9 @@ public class TextBrew {
 		public double transpose = 2.0d;
 		public double substitute = 1.0d;
 	}
-
-	public class BrewResult {
+	
+	
+	private class BrewResult {
 		public double cost;
 
 	}
