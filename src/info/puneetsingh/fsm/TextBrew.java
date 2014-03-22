@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * my site: http://www.puneetsingh.info
  * Beware this code is not fully tested yet
  * Text Brew Implementation.  See: http://www.ling.ohio-state.edu/~cbrew/795M/string-distance.html
- * @version 0.04
+ * @version 0.05
  */
 public class TextBrew {
 	public Costs costs = null;
@@ -59,6 +59,35 @@ public class TextBrew {
 			return retScore;
 	}
 	/**
+	 * static compare function to compare two string using textbrew algorithm
+	 * @param left
+	 * @param right
+	 * @param order of the qudratic function
+	 * @return value of distance between two texts between 0.0 and 1.0 (greater the better)
+	 */
+	public static Double compareUsingQuadratic(String left, String right, double order) {
+		TextBrew t = new TextBrew();
+		if(match!=null&&insert!=null&&delete!=null&&substitute!=null)
+		{
+			t.costs.match = match;
+			t.costs.insert = insert;
+			t.costs.delete = delete;
+			t.costs.substitute = substitute;
+		}
+		double len = (left.length()+ right.length())/2.0;
+		int maxlen = Math.max(left.length(), right.length());
+		
+		if ((double) len / (double) maxlen <= 0.5)
+			return 0.0;
+		
+		double retScore = (1.0 - ((t.computeSimilarity(left,right).cost) / (len)));
+		retScore = Math.pow(retScore*10,order)/Math.pow(10, order);;
+		if(retScore < 0.05) 
+			return 0.0;//for all erroneous cases
+		else
+			return retScore;
+	}
+	/**
 	 * static compare function to compare two string without order using textbrew algorithm
 	 * i.e. left or right does not matter, and this function would return best score
 	 * without considering order.
@@ -89,7 +118,39 @@ public class TextBrew {
 		else
 			return retScore;
 	}
-	
+	/**
+	 * static compare function to compare two string without order using textbrew algorithm
+	 * i.e. left or right does not matter, and this function would return best score
+	 * without considering order.
+	 * @param left
+	 * @param right
+	 * @param order of the qudratic function
+	 * @return value of distance between two texts between 0.0 and 1.0 (greater the better)
+	 */
+	public static Double compareUsingQuadraticBestScore(String left, String right, double order) {
+		TextBrew t = new TextBrew();
+		if(match!=null&&insert!=null&&delete!=null&&substitute!=null)
+		{
+			t.costs.match = match;
+			t.costs.insert = insert;
+			t.costs.delete = delete;
+			t.costs.substitute = substitute;
+		}
+		double len = (left.length()+ right.length())/2.0;
+		int maxlen = Math.max(left.length(), right.length());
+		
+		if ((double) len / (double) maxlen <= 0.5)
+			return 0.0;
+		
+		double retScore1 = (1.0 - (t.computeSimilarity(left,right).cost) / (len));
+		double retScore2 = (1.0 - (t.computeSimilarity(right,left).cost) / (len));
+		double retScore = Math.max(retScore1, retScore2);
+		retScore = Math.pow(retScore*10,order)/Math.pow(10, order);
+		if(retScore < 0.05) 
+			return 0.0;//for all erroneous cases
+		else
+			return retScore;
+	}
 	public BrewResult computeSimilarity(String left, String right) {
 		if ( (null == left||left.length() == 0) && (null == right||right.length() == 0)) {
 			return new BrewResult();
