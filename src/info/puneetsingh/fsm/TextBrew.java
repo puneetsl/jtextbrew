@@ -4,15 +4,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Original @author Kyle Burton
- * Taken from: https://github.com/relaynetwork/fuzzy-string-matching
- * Date: Oct 12, 2010
+ * Date: April 13, 2014
  * License: Apache V2
  * @author puneet singh
  * my site: http://www.puneetsingh.info
  * Beware this code is not fully tested yet
+ * Excerpts of this code taken from: https://github.com/relaynetwork/fuzzy-string-matching  @author Kyle Burton
  * Text Brew Implementation.  See: http://www.ling.ohio-state.edu/~cbrew/795M/string-distance.html
- * @version 0.05
+ * @version 0.07
  */
 public class TextBrew {
 	public Costs costs = null;
