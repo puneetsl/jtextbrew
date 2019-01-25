@@ -1,6 +1,5 @@
 
 ![](https://github.com/puneetsl/jtextbrew/blob/master/resources/jtextbrew.png?raw=true)
-jtextbrew
 ========
 
 Java Library for fuzzy string matching using TextBrew algorithm.<br>
